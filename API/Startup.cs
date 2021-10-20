@@ -11,10 +11,13 @@ namespace API
   public class Startup
   {
     private readonly IConfiguration _config;
+    private readonly string[] _lstURL;
 
     public Startup(IConfiguration config)
     {
       _config = config;
+      string strUrls = _config["URLList"];
+      _lstURL = strUrls.Split(';'); 
     }
 
 
@@ -29,6 +32,7 @@ namespace API
 
       });
       services.AddControllers();
+      services.AddCors();
       /*
       services.AddSwaggerGen(c =>
       {
@@ -53,6 +57,7 @@ namespace API
 
       app.UseRouting();
 
+      app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().WithOrigins(_lstURL));
       app.UseAuthorization();
 
       app.UseEndpoints(endpoints =>
