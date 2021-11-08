@@ -1,5 +1,8 @@
 using System.Collections.Generic;
+<<<<<<< HEAD
 using System.Linq;
+=======
+>>>>>>> a144cad88e0c01c32d52a9a42903fe188c26a225
 using System.Security.Claims;
 using System.Threading.Tasks;
 using API.Data;
@@ -44,7 +47,12 @@ namespace API.Controllers
     [HttpPut]
     public async Task<ActionResult> UpdateUser(MemberUpdateDto memberUpdateDto)
     {
+<<<<<<< HEAD
       var user = await _userRepository.GetUserByUsernameAsync(User.GetUserName());
+=======
+      var username = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+      var user = await _userRepository.GetUserByUsernameAsync(username);
+>>>>>>> a144cad88e0c01c32d52a9a42903fe188c26a225
 
       _mapper.Map(memberUpdateDto, user);
 
@@ -54,6 +62,7 @@ namespace API.Controllers
 
       return BadRequest("Failed to update user");
     }
+<<<<<<< HEAD
 
     [HttpPost("add-photo")]
     public async Task<ActionResult<PhotoDto>> AddPhoto(IFormFile file)
@@ -121,5 +130,7 @@ namespace API.Controllers
 
       return BadRequest("Failed to delete the photo");
     }
+=======
+>>>>>>> a144cad88e0c01c32d52a9a42903fe188c26a225
   }
 }
